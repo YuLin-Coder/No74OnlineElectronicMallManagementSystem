@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+    "http://struts.apache.org/dtds/struts-2.1.dtd">
+
+<struts>
+<!-- 明确配置一下，会被第3方插件替换 -->
+	<constant name="struts.objectFactory" value="spring" />
+	<constant name="struts.devMode" value="true" />
+	<constant name="struts.i18n.encoding" value="UTF-8" />
+	<!-- 开启动态方法调用 -->
+	 <constant name="struts.enable.DynamicMethodInvocation" value="true"></constant>
+	<!-- 文件上传大小限制 为10M -->
+	<constant name="struts.multipart.maxSize" value="10701096" />
+	<constant name="struts.multipart.saveDir" value="/tmp"/>
+	
+     <package name="webShopping" namespace="/" extends="struts-default">
+         <!-- 用户 -->
+        <action name="UserAction" class="userAction">
+             <result name="login" >/login_error.jsp</result>
+             <result name="index">/login_success.jsp</result>
+             <result name="regsuccess">/register.jsp</result>
+             <result name="regerror">/register.jsp</result>
+             <result name="success">/reg_success.jsp</result>
+             <result name="error">/reg_error.jsp</result>
+             <result name="logout">/index.jsp</result>
+             <result name="updateUser" >/userInfo.jsp</result>
+             <result name="listUser" >/admin/include/user/userList.jsp</result>
+             <result name="queryUser" >/admin/include/user/userQuery.jsp</result>
+             <result name="findUsernull">/findPass.jsp</result>
+             <result name="findUser" >/resetPass.jsp</result>
+             <result name="updatePass">/resetPass.jsp</result>
+             <result name="upPass">/updatePass.jsp</result>
+         </action>
+         
+         <!-- 管理员 -->
+        <action name="AdminAction" class="adminAction">
+             <result name="login" >/admin/login.jsp</result>
+             <result name="index">/admin/index.jsp</result>
+             <result name="logout">/admin/login.jsp</result>
+             <result name="updateAdmin">/admin/include/admin/amend.jsp</result>
+             
+         </action>
+         
+          <!-- 商品种类 -->
+        <action name="CommodityClassAction" class="commodityClassAction">
+             <result name="addCommodityClass" >/admin/include/commodityClass/commodityClassAdd.jsp</result>
+             <result name="listCommodityClass" >/admin/include/commodityClass/commodityClassList.jsp</result>
+             <result name="deleteCommodityClass" type="redirect">CommodityClassAction!listCommodityClass.action</result>
+         </action>
+         <!-- 商品 -->
+        <action name="CommodityAction" class="commodityAction">
+        	<result name="addComm" >/admin/include/commodity/commodityAdd.jsp</result>
+             <result name="addCommoditySuccess" >/admin/include/commodity/commodityAdd.jsp</result>
+             <result name="addCommodityError" >/admin/include/commodity/commodityAdd.jsp</result>
+             
+             <result name="listCommodity" >/admin/include/commodity/commodityList.jsp</result>
+             <result name="deleteCommodity" type="redirect">CommodityAction!listCommodity.action</result>
+             <result name="findCommodityById" >/showdetails.jsp</result>
+             <result name="findCommodityByName" >/showByName.jsp</result>
+           <result name="findCommodityByClass" >/showByClass.jsp</result>
+           
+         </action>
+         <!-- 购物车 -->
+         <action name="AddToCarAction" class="addToCarAction">
+         <result name="success" >/showCar.jsp</result>
+         <result name="error" >/showCarnull.jsp</result>
+         <result name="delete" >/showCar.jsp</result>
+         </action>
+          <!-- 订单 -->
+         <action name="OrderFormAction" class="orderFormAction">
+          <result name="listOrderForm" >/admin/include/order/orderList.jsp</result>
+          <result name="conOrder" >/admin/include/order/orderList.jsp</result>
+         
+          <result name="queryOrder" >/admin/include/order/orderQuery.jsp</result>
+          <result name="findOrderFormByUserName">/showOrderForm.jsp</result>
+          <result name="payOrderForm">/payMent.jsp</result> 
+          <result name="addOrderForm" >/payMent.jsp</result>
+         <result name="payOrder">/showOrderForm.jsp</result> 
+         </action>
+         <!-- 留言 -->
+         <action name="MessageAction" class="messageAction">
+          <result name="listMessage" >/admin/include/message/messageList.jsp</result>
+          <result name="queryMessage" >/admin/include/message/messageQuery.jsp</result>
+          <result name="deleteMessage" type="redirect">MessageAction!listMessage.action</result>
+         </action>
+         <!-- 主页 -->
+         <action name="GoIndexAction" class="goIndexAction">
+			<result name="success">/index.jsp</result>
+		</action>
+     </package>
+</struts>
